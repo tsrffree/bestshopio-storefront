@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aura · All collections</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" />
+  <style>
+    :root { --ink: #111827; --brand: #103635; --max: 1200px; --font: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    * { box-sizing: border-box; }
+    body { margin: 0; color: var(--ink); font-family: var(--font); background: #fff; }
+    a { color: inherit; }
+    button, input { font: inherit; }
+    .announce { display: flex; align-items: center; justify-content: center; gap: 16px; min-height: 40px; padding: 8px 16px; background: var(--brand); color: #fff; font-size: 14px; letter-spacing: .02em; }
+    .announce button { border: 0; background: none; color: inherit; font-size: 18px; cursor: pointer; }
+    .announce u { text-underline-offset: 2px; }
+    header { position: sticky; top: 0; z-index: 20; background: #fff; border-bottom: 1px solid #eee; }
+    .bar { display: flex; align-items: center; gap: 18px; width: min(var(--max), calc(100% - 80px)); min-height: 72px; margin: 0 auto; }
+    .logo { flex: none; font-size: 22px; font-weight: 800; letter-spacing: -.02em; text-decoration: none; }
+    .nav { display: flex; flex: 1; justify-content: center; gap: 22px; margin: 0; padding: 0; list-style: none; }
+    .nav li { position: relative; }
+    .nav a { display: inline-flex; align-items: center; gap: 4px; font-size: 13.5px; font-weight: 600; text-decoration: none; white-space: nowrap; }
+    .drop { position: absolute; top: 100%; left: 0; min-width: 180px; padding: 10px 14px; border: 1px solid #eee; border-radius: 10px; background: #fff; box-shadow: 0 12px 30px rgba(0,0,0,.08); opacity: 0; visibility: hidden; }
+    .nav li:hover .drop, .nav li:focus-within .drop { opacity: 1; visibility: visible; }
+    .drop a { display: block; padding: 6px 0; color: #333; font-weight: 500; }
+    .tools { display: flex; align-items: center; gap: 2px; }
+    .pill, .iconbtn { border: 0; background: none; color: var(--ink); cursor: pointer; }
+    .pill { font-size: 12px; font-weight: 600; }
+    .iconbtn { width: 38px; height: 38px; border-radius: 50%; }
+    .iconbtn:hover { background: rgba(0,0,0,.06); }
+    .menu-btn { display: none; }
+    .list { padding: 48px 0 64px; }
+    .wrap { width: min(var(--max), calc(100% - 80px)); margin: 0 auto; }
+    .list h1 { margin: 0 0 34px; color: var(--brand); font-family: "Playfair Display", Georgia, serif; font-size: 40px; font-weight: 700; line-height: 1.15; text-align: center; }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .card { position: relative; display: block; aspect-ratio: 3/4; overflow: hidden; color: #fff; text-decoration: none; background: #e5e7eb center / cover no-repeat; }
+    .card:focus-visible { outline: 3px solid var(--brand); outline-offset: 3px; }
+    .card .bg { position: absolute; inset: 0; background: inherit; transition: transform .4s; }
+    .card:hover .bg { transform: scale(1.04); }
+    .card .ov { position: absolute; inset: 0; background: rgba(0,0,0,.3); }
+    .card .cap { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 18px; text-align: center; }
+    .card strong { max-width: 100%; font-family: "Playfair Display", Georgia, serif; font-size: 22px; font-weight: 700; line-height: 1.2; overflow-wrap: anywhere; }
+    .arrow { position: absolute; bottom: 18px; left: 50%; display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,.92); color: #1a1a1a; opacity: 0; transform: translateX(-50%); transition: opacity .18s; }
+    .card:hover .arrow, .card:focus-visible .arrow { opacity: 1; }
+    footer { background: var(--brand); color: #fff; }
+    .foot { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 28px; width: min(var(--max), calc(100% - 80px)); margin: 0 auto; padding: 48px 0 20px; }
+    .foot strong { display: block; margin-bottom: 12px; font-size: 13px; letter-spacing: .04em; text-transform: uppercase; }
+    .foot summary { list-style: none; }
+    .foot summary::-webkit-details-marker { display: none; }
+    .foot summary strong { margin-bottom: 0; }
+    .foot a, .foot p { display: block; margin: 8px 0; color: #fff; font-size: 14px; text-decoration: none; opacity: .88; }
+    .ft-form { display: flex; gap: 8px; margin-top: 8px; }
+    .ft-form input { flex: 1; border: 0; border-bottom: 1px solid rgba(255,255,255,.7); background: transparent; color: #fff; outline: none; }
+    .ft-form button { border: 0; background: none; color: #fff; font-size: 18px; cursor: pointer; }
+    .legal { display: flex; justify-content: space-between; gap: 16px; width: min(var(--max), calc(100% - 80px)); margin: 0 auto; padding: 16px 0 28px; border-top: 1px solid rgba(255,255,255,.14); font-size: 13px; opacity: .8; }
+    .social { display: flex; gap: 12px; }
+    .social a { font-size: 16px; text-decoration: none; }
+    .nav-drawer { position: fixed; inset: 0; z-index: 30; display: none; }
+    .nav-drawer.show { display: block; }
+    .nav-drawer .scrim { position: absolute; inset: 0; background: rgba(0,0,0,.35); }
+    .nav-drawer nav { position: absolute; top: 0; left: 0; width: min(320px, 86vw); height: 100%; padding: 8px 0; background: #fff; }
+    .nav-drawer a, .nav-drawer button { display: block; width: 100%; padding: 12px 16px; border: 0; border-bottom: 1px solid #f4f4f4; background: none; color: var(--ink); font-size: 15px; text-align: left; text-decoration: none; }
+    .toast { position: fixed; bottom: 24px; left: 50%; z-index: 40; display: none; padding: 12px 16px; border-radius: 999px; background: #0f172a; color: #fff; font-size: 13px; font-weight: 600; transform: translateX(-50%); }
+    .toast.show { display: block; }
+    @media (max-width: 900px) {
+      .nav, .pill { display: none; }
+      .menu-btn { display: inline-flex; }
+      .bar, .wrap, .foot, .legal { width: min(100% - 32px, var(--max)); }
+      .list { padding: 28px 0 40px; }
+      .list h1 { margin-bottom: 22px; font-size: 26px; }
+      .grid { grid-template-columns: 1fr; gap: 12px; }
+      .arrow { display: none; }
+      .foot { grid-template-columns: 1fr; }
+      .foot details { border-bottom: 1px solid rgba(255,255,255,.14); }
+      .foot summary { padding: 12px 0; cursor: pointer; }
+    }
+  </style>
+</head>
+<body>
+  <div class="announce" id="announce"></div>
+  <header>
+    <div class="bar">
+      <button class="iconbtn menu-btn" id="openNav" type="button" aria-label="Menu">☰</button>
+      <a class="logo" href="home.html">AURA</a>
+      <ul class="nav">
+        <li><a href="home.html">Home</a></li>
+        <li>
+          <a href="collections.html">Shop Now <span>▾</span></a>
+          <div class="drop">
+            <a href="collection.html">Best sellers</a>
+            <a href="collection.html">New arrivals</a>
+            <a href="collection.html">Sale</a>
+          </div>
+        </li>
+        <li>
+          <a href="collection.html">Women <span>▾</span></a>
+          <div class="drop">
+            <a href="collection.html">Dresses</a>
+            <a href="collection.html">Tops</a>
+            <a href="collection.html">Bottoms</a>
+          </div>
+        </li>
+        <li><a href="collection.html">Journal</a></li>
+      </ul>
+      <div class="tools">
+        <span class="pill">EN ▾</span>
+        <span class="pill">USD ▾</span>
+        <button class="iconbtn" type="button" aria-label="Account">○</button>
+        <button class="iconbtn" type="button" aria-label="Cart">▢</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="list">
+    <div class="wrap">
+      <h1>All collections</h1>
+      <div class="grid" id="grid"></div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="foot">
+      <div>
+        <strong>Let’s stay in touch</strong>
+        <p>Sign up and save 10% on your first order.</p>
+        <form class="ft-form" id="footForm">
+          <input type="email" required placeholder="E-mail" aria-label="E-mail">
+          <button type="submit" aria-label="Subscribe">→</button>
+        </form>
+      </div>
+      <details open>
+        <summary><strong>Shop</strong></summary>
+        <a href="collection.html">Best sellers</a>
+        <a href="collection.html">New arrivals</a>
+        <a href="collection.html">Sale</a>
+      </details>
+      <details open>
+        <summary><strong>Help</strong></summary>
+        <a href="index.html?view=account-orders">Track order</a>
+        <a href="collection.html">Shipping</a>
+        <a href="collection.html">Returns</a>
+        <a href="mailto:hello@aura.shop">Contact us</a>
+      </details>
+      <details open>
+        <summary><strong>Policies</strong></summary>
+        <a href="collection.html">Privacy Policy</a>
+        <a href="collection.html">Refund Policy</a>
+        <a href="collection.html">Terms of Service</a>
+        <a href="collection.html">Shipping Policy</a>
+      </details>
+      <div>
+        <strong>Contact</strong>
+        <a href="mailto:hello@aura.shop">hello@aura.shop</a>
+        <p>+1 (508) 204-3308</p>
+        <p>7300 Miller Dr, Frederick CO 80504</p>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 Aura. All Rights Reserved.</span>
+      <span class="social"><a href="collection.html" aria-label="Instagram">◎</a><a href="collection.html" aria-label="TikTok">♪</a><a href="collection.html" aria-label="X">𝕏</a></span>
+    </div>
+  </footer>
+
+  <div class="nav-drawer" id="navDrawer">
+    <div class="scrim" data-close-nav></div>
+    <nav>
+      <button type="button" data-close-nav>Close</button>
+      <a href="home.html">Home</a>
+      <a href="collections.html">Shop Now</a>
+      <a href="collection.html">Women</a>
+      <a href="collection.html">Journal</a>
+    </nav>
+  </div>
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const MESSAGES = [
+      ["Free shipping on orders over $79", ""],
+      ["30% off all dresses — this week only", "collection.html"],
+      ["New spring arrivals just dropped", "collection.html"]
+    ];
+    const COLLECTIONS = [
+      ["Best sellers", "https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=900&q=80"],
+      ["New arrivals", "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=80"],
+      ["Dresses", "https://images.unsplash.com/photo-1556306535-0f09a537f0a3?auto=format&fit=crop&w=900&q=80"],
+      ["Tops", "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=900&q=80"],
+      ["Bottoms", "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80"],
+      ["Sale", "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?auto=format&fit=crop&w=900&q=80"]
+    ];
+    const state = {};
+    function esc(value) { return String(value).replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char])); }
+    function toast(text) { const el = document.getElementById("toast"); el.textContent = text; el.classList.add("show"); clearTimeout(state.timer); state.timer = setTimeout(() => el.classList.remove("show"), 1800); }
+
+    document.getElementById("announce").innerHTML = '<button type="button" id="prevMsg" aria-label="Previous">‹</button><span id="message"></span><button type="button" id="nextMsg" aria-label="Next">›</button>';
+    function showMessage() {
+      const [text, href] = MESSAGES[state.message || 0];
+      document.getElementById("message").innerHTML = esc(text) + (href ? ' <a href="' + href + '"><u>Shop now</u></a>' : "");
+    }
+    document.getElementById("prevMsg").onclick = () => { state.message = ((state.message || 0) + MESSAGES.length - 1) % MESSAGES.length; showMessage(); };
+    document.getElementById("nextMsg").onclick = () => { state.message = ((state.message || 0) + 1) % MESSAGES.length; showMessage(); };
+    showMessage();
+    setInterval(() => { state.message = ((state.message || 0) + 1) % MESSAGES.length; showMessage(); }, 4000);
+
+    document.getElementById("grid").innerHTML = COLLECTIONS.map(([title, image]) => '<a class="card" href="collection.html" style="background-image:url(' + image + ')"><span class="bg" style="background-image:url(' + image + ')"></span><span class="ov"></span><span class="cap"><strong>' + esc(title) + '</strong></span><span class="arrow" aria-hidden="true">›</span></a>').join("");
+    document.getElementById("footForm").onsubmit = (event) => { event.preventDefault(); toast("You’re on the list."); event.target.reset(); };
+    if (matchMedia("(max-width: 900px)").matches) document.querySelectorAll(".foot details").forEach((item) => { item.open = false; });
+    document.getElementById("openNav").onclick = () => document.getElementById("navDrawer").classList.add("show");
+    document.body.addEventListener("click", (event) => { if (event.target.closest("[data-close-nav]")) document.getElementById("navDrawer").classList.remove("show"); });
+  </script>
+</body>
+</html>

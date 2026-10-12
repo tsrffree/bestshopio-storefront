@@ -59,8 +59,9 @@
     .nav { position: sticky; top: 0; z-index: 30; display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 72px; padding: 0 40px; border-bottom: 1px solid var(--line); background: #ffffff; }
     .brand { border: 0; background: transparent; color: var(--ink); cursor: pointer; font-size: 18px; font-weight: 800; text-align: left; }
     .tabs { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
-    .tabs button { height: 38px; border: 1px solid #d8d8d8; border-radius: 6px; padding: 0 14px; background: #ffffff; color: #111111; cursor: pointer; font-size: 13px; font-weight: 700; }
-    .tabs button.active, .tabs button:hover { border-color: #111111; background: #111111; color: #ffffff; }
+    .tabs button, .tabs a { height: 38px; border: 1px solid #d8d8d8; border-radius: 6px; padding: 0 14px; background: #ffffff; color: #111111; cursor: pointer; font-size: 13px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; }
+    .tabs button.active, .tabs button:hover, .tabs a:hover { border-color: #111111; background: #111111; color: #ffffff; }
+    a.entry-card { display: block; color: inherit; text-decoration: none; }
 
     .entry { max-width: 1080px; margin: 0 auto; padding: 72px 40px; }
     .entry-label { margin: 0 0 12px; color: #555555; font-size: 12px; font-weight: 900; }
@@ -397,6 +398,8 @@
       <button data-go="checkout">Checkout</button>
       <button data-go="account-orders">Account center</button>
       <button data-go="login">Login</button>
+      <a href="home.html">Home</a>
+      <a href="collection.html">Collection</a>
     </div>
   </nav>
   <main id="app"></main>
@@ -527,7 +530,7 @@
     }
 
     function entry() {
-      return `<section class="entry"><p class="entry-label">NEURIX USER-END TESTING</p><h1>Cart, drawer, and Checkout test entry</h1><p>Home, About us, and PDP are handled by development. This prototype keeps only the transaction states needed for QA across bundle and subscription scenarios.</p><div class="entry-grid"><button class="entry-card" data-go="cart-page"><strong>Cart page</strong><span>Full-page cart for normal products, variants, bundles, subscriptions, and subscription bundles.</span></button><button class="entry-card" data-go="cart-drawer"><strong>Cart drawer</strong><span>Side cart drawer with variant switching, bundle children, subscription labels, and checkout entry.</span></button><button class="entry-card" data-go="checkout"><strong>Checkout</strong><span>Checkout summary, express wallets, delivery form, card fields, bundle and subscription display.</span></button></div></section>`;
+      return `<section class="entry"><p class="entry-label">NEURIX USER-END TESTING</p><h1>Cart, drawer, and Checkout test entry</h1><p>Home, About us, and PDP are handled by development. This prototype keeps only the transaction states needed for QA across bundle and subscription scenarios.</p><div class="entry-grid"><button class="entry-card" data-go="cart-page"><strong>Cart page</strong><span>Full-page cart for normal products, variants, bundles, subscriptions, and subscription bundles.</span></button><button class="entry-card" data-go="cart-drawer"><strong>Cart drawer</strong><span>Side cart drawer with variant switching, bundle children, subscription labels, and checkout entry.</span></button><button class="entry-card" data-go="checkout"><strong>Checkout</strong><span>Checkout summary, express wallets, delivery form, card fields, bundle and subscription display.</span></button><a class="entry-card" href="home.html"><strong>Home</strong><span>Aura home: slideshow, image with text, featured products, reviews, FAQ, and newsletter.</span></a><a class="entry-card" href="collection.html"><strong>Collection</strong><span>Aura collection page: banner, category cards, filters, sort, and product grid.</span></a></div></section>`;
     }
 
     function checkoutItems() {
